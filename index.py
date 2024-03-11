@@ -1,7 +1,8 @@
 import os 
 import os.path as path
 
-def try1():
+def main():
+	print("I am in main function")def try1():
 	print(__name__)
 
 try1()
