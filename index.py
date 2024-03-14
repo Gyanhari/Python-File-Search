@@ -1,5 +1,3 @@
-import os 
-import os.path as path
 from searchfile import searchfile
 from searchfolder import searchfolder
 
