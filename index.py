@@ -2,22 +2,27 @@ from searchfile import searchfile
 from searchfolder import searchfolder
 
 def main():
-    dir_or_file = 0
-    filename = str(input("Enter File/Directory name: "))
-    print("Select If your search is file or a directory\n")
-    while(dir_or_file !=1 and dir_or_file !=2):
-        try:
-            dir_or_file = int(input("Enter 1 for file and 2 for directory: "))
-        except ValueError:
-            print("Enter a Number 1 or 2 \n")
-            
-    if dir_or_file == 1: #If It is a File        
-        print(f'Searching For The file {filename}. Please wait a moment')
-        searchfile(filename)
+	choice = 0
+	name = ''
+	while (choice not in [1,2]):
+		try: 
+			choice = int(input("\nEnter the choice : \n1. File \n2. Folder \n -> "))
+		except ValueError:
+			print(f"\nThe value you have entered {choice} is not the valid input choose either 1 or 2")
 
-    else: #If It is a Folder
-        print(f'Searching For The folder {filename}. Please wait a moment')
-        searchfolder(filename)
+	title_data = "File" if (choice == 1) else "Folder"
+
+	while (len(name) == 0):
+		print(f"\nEnter the name of the {title_data} to be searched :  ")
+		name = str(input())
+
+	if (choice == 1): #If It is a File
+		print(f'Searching For The file {name}. Please wait a moment')
+		searchfile(name)
+
+	else: #If It is a Folder
+		print(f'Searching For The folder {name}. Please wait a moment')
+		searchfolder(name)
     
     
 if __name__ == "__main__" :
