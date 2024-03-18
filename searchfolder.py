@@ -1,4 +1,4 @@
 from dependency import os,path,re
 
-def searchfolder(filename):
+def searchfolder(folder_name):
     pass
