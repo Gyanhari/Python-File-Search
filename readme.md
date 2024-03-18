@@ -6,4 +6,4 @@ make it by following command
 - ### `os module`
 - ### `os.path module`
 - ### `re module`
-- ### `pywin32`
+- ### `string`
