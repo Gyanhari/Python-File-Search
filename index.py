@@ -1,4 +1,4 @@
-from searchfile import searchfile
+from searchfile import search_file
 from searchfolder import searchfolder
 
 def main():
@@ -18,7 +18,7 @@ def main():
 
 	if (choice == 1): #If It is a File
 		print(f'Searching For The file {name}. Please wait a moment')
-		searchfile(name)
+		search_file(name)
 
 	else: #If It is a Folder
 		print(f'Searching For The folder {name}. Please wait a moment')
