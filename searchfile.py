@@ -22,4 +22,11 @@ def file_existence(drive, file_name):
     return matched_files
 
 def file_address(root, file_name):
-    return os.path.join(root, file_name)
+
+    file_path = os.path.join(root, file_name)
+    if os.path.exists(file_path):
+        return file_path
+
+    else:
+        directories = os.listdir(root)
+        return directories
