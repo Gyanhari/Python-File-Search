@@ -3,7 +3,8 @@ import string
 
 
 def get_available_drives():
-    return ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
+    drives =  ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
+    return([drive + '\\' for drive in drives])
 
 def search_file(file_name):
     all_matched_files = []

@@ -1,5 +1,6 @@
 from searchfile import search_file
 from searchfolder import searchfolder
+from dependency import time
 
 def main():
 	choice = 0
@@ -18,7 +19,11 @@ def main():
 
 	if (choice == 1): #If It is a File
 		print(f'Searching For The file {name}. Please wait a moment')
-		search_file(name)
+		start = time.perf_counter()
+		print(search_file(name))
+		finish = time.perf_counter()
+		print(f'The total time required to search for the file {name} is {round((finish - start), 2)} seconds')
+
 
 	else: #If It is a Folder
 		print(f'Searching For The folder {name}. Please wait a moment')
