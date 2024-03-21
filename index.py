@@ -1,4 +1,4 @@
-from searchfile import search_file
+from searchfile import multiprocess_search
 from searchfolder import searchfolder
 from dependency import time
 
@@ -18,18 +18,14 @@ def main():
 		name = str(input())
 
 	if (choice == 1): #If It is a File
-		print(f'Searching For The file {name}. Please wait a moment')
+		print(f'Searching For The file {name}. Please wait a moment\n')
 		start = time.perf_counter()
-		print(search_file(name))
+		print(multiprocess_search(name))
 		finish = time.perf_counter()
-		print(f'The total time required to search for the file {name} is {round((finish - start), 2)} seconds')
-
-
+		print(f'\nThe total time required to search for the file {name} is {round((finish - start), 2)} seconds')
 	else: #If It is a Folder
 		print(f'Searching For The folder {name}. Please wait a moment')
 		searchfolder(name)
-    
-    
 if __name__ == "__main__" :
 	main()
 	print("\nThank you for using our system")
