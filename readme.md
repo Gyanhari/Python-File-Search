@@ -6,5 +6,5 @@ make it by following command
 - ### `os module`
 - ### `os.path module`
 - ### `re module`
-- ### `string`
-- ### `time`
+- ### `string module`
+- ### `time module`
