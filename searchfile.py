@@ -6,9 +6,16 @@ import concurrent.futures
 
 
 def get_available_drives():
-    """ Used to check the drive in the compuer of the user """
-    drives =  ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
-    return([drive + '\\' for drive in drives])
+	if (os.name == 'posix'):
+		drives = os.listdir('/home/');
+		available_drives = []
+		for drive in drives:
+			available_drives.append("/home/"+drive)
+	else : 
+		a_available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
+		available_drives = [drive + '\\' for drive in a_available_drives]
+	print(available_drives)
+	return (available_drives)
 
 def search_file(drive, file_name):
     """ Used to search file that is inputed by the user """
