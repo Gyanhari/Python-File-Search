@@ -8,7 +8,6 @@ def get_available_drives():
 			available_drives.append("/home/"+drive)
 	else : 
 		available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
-	print(available_drives)
 	return (available_drives)
 
 def normalize_folder(folder_name):
