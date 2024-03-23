@@ -1,6 +1,15 @@
-from dependency import os,path,re,string
-available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
+from dependency import * 
 
+def get_available_drives():
+	if (os.name == 'posix'):
+		drives = os.listdir('/home/');
+		available_drives = []
+		for drive in drives:
+			available_drives.append("/home/"+drive)
+	else : 
+		available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
+	print(available_drives)
+	return (available_drives)
 
 def normalize_folder(folder_name):
     return folder_name.lower()
@@ -8,29 +17,24 @@ def normalize_folder(folder_name):
 
 
 def folder_existence(drive,folder_name):
-    s_folder = normalize_folder(folder_name)
-    folders = []
-    for drive in available_drives:
-        for root, dirs, files in os.walk(drive):
-            for dir in dirs:
-                if normalize_folder(dir) == s_folder:
-                    folder_path = find_folder_path(root, folder_name) 
-                    folders.append(folder_path) 
-
-    print(s_folder)
-    return folders 
+	s_folder = normalize_folder(folder_name)
+	folders = []
+	for root, dirs, files in os.walk(drive):
+		for dir in dirs:
+			if normalize_folder(dir) == s_folder:
+				folder_path = find_folder_path(root, folder_name) 
+				folders.append(folder_path) 
+	return folders 
 
 
 
 def searchfolder(folder_name):
-    folder_path=folder_existence("C:",folder_name)
-    
-    if folder_path: 
-        print("Search results: ")
-        for folder in folder_path:
-            print(folder)
-    else:
-        print("Folder not found")
+	folders = multiprocessing_search(folder_name)
+	if len(folders):
+		print("Search results: ")
+		display_all(folders)
+	else:
+		print("Folder not found")
 
 
 def find_folder_path(root_path, folder_name):
@@ -40,4 +44,18 @@ def find_folder_path(root_path, folder_name):
    else:
        return None
 
+def multiprocessing_search(folder_name):
+	match_folder = []
+	with concurrent.futures.ProcessPoolExecutor() as executor:
+		drives = get_available_drives()
+		results = executor.map(folder_existence,drives,[folder_name]*len(drives))
+		for result in results:
+			match_folder.extend(result)
+		return match_folder
 
+def display_all(folders):
+	i:int =0
+	for data in folders: 
+		print(f"{i}. {data}")
+		i +=1 
+	
