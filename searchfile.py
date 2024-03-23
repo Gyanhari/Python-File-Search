@@ -14,7 +14,6 @@ def get_available_drives():
 	else : 
 		a_available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
 		available_drives = [drive + '\\' for drive in a_available_drives]
-	print(available_drives)
 	return (available_drives)
 
 def search_file(drive, file_name):
