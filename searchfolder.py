@@ -7,21 +7,23 @@ def normalize_folder(folder_name):
      
 
 
-def folder_existence(folder_name):
+def folder_existence(drive,folder_name):
     s_folder = normalize_folder(folder_name)
     folders = []
     for drive in available_drives:
         for root, dirs, files in os.walk(drive):
             for dir in dirs:
                 if normalize_folder(dir) == s_folder:
-                    folders.append(os.path.join(root, dir))               
+                    folder_path = find_folder_path(root, folder_name) 
+                    folders.append(folder_path) 
+
     print(s_folder)
     return folders 
 
 
 
 def searchfolder(folder_name):
-    folder_path=folder_existence(folder_name)
+    folder_path=folder_existence("C:",folder_name)
     
     if folder_path: 
         print("Search results: ")
@@ -31,5 +33,11 @@ def searchfolder(folder_name):
         print("Folder not found")
 
 
-folder_name=input("Enter the folder name: ")
-searchfolder(folder_name)
+def find_folder_path(root_path, folder_name):
+   abc = os.path.join(root_path, folder_name)
+   if os.path.exists(abc):
+       return abc
+   else:
+       return None
+
+
